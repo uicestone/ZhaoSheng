@@ -1,0 +1,34 @@
+/************************************************/
+/*** Pagination : Start *************************/
+/************************************************/
+
+div.post-navi {
+	margin: 16px 0 41px 0;
+	background: transparent url('../images/bg-content-mid.gif') top center repeat-y; 
+}
+
+div.navigation div.prev { float: left; }
+div.navigation div.next { float: right; }
+
+div.simplenavi a:hover { text-decoration: none; border: none; }
+div.simplenavi a:active { text-decoration: none; border: none; }
+
+div.wp-pagenavi { 
+	text-align: center;
+	padding: 0px 10px;
+}
+
+div.wp-pagenavi span, div.wp-pagenavi a {
+	font: bold 14px/18px Helvetica,Arial,sans-serif;
+	padding: 0 10px; text-decoration: none;
+}
+
+div.wp-pagenavi span.current, div.wp-pagenavi span.extend, div.wp-pagenavi a:hover, div.wp-pagenavi a:active {
+	font: bold 14px/18px Helvetica,Arial,sans-serif;
+	color: text-decoration: none;
+}
+
+
+/************************************************/
+/*** Pagination : End ***************************/
+/************************************************/

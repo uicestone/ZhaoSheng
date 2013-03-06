@@ -1,0 +1,22 @@
+/*
+Theme Name: Maamo
+Theme URI: http://www.paddsolutions.com/wordpress-theme-maamo/
+Description: Maamo is a two-column, fixed-width and widget-ready WordPress theme with TweetMeme retweet button and lots of advertising blocks for monetization. Download more <a href="http://www.paddsolutions.com">free WordPress Themes</a>.
+Version: 1.0
+Author: Padd Solutions
+Author URI: http://www.paddsolutions.com
+Tags: two columns, fixed width, adsense ready, advertisement ready, valid css, valid xhtml, feature content gallery, twitter, youtube, tweetmeme, social bookmarks
+*/
+
+@import 'css/required.css';
+@import 'css/typography.css';
+@import 'css/layout.css';
+@import 'css/navigation.css';
+@import 'css/pagination.css';
+@import 'css/color.css';
+@import 'css/s3slider.css';
+
+
+
+
+

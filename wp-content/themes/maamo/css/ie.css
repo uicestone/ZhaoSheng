@@ -1,0 +1,10 @@
+/*
+ * Section: IE
+ */
+ 
+div#mainmenu ul li a:link span, div#mainmenu ul li a:visited span { cursor: hand; }
+div.box-categories ul li a:link span,  div.box-categories ul li a:visited span { cursor: hand; }
+div.post { min-width: 0; }
+div.tweetmeme_button { margin: 2em 0 0 0; }
+div.post-group-index-title h2 { margin: 0 auto; width: 628px; }
+
