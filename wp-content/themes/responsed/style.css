@@ -1,0 +1,25 @@
+/*
+Theme Name:     responsed
+Author:         陆秋石
+Template:       responsive
+*/
+
+@import url('../responsive/style.css');
+
+h1{
+	font-size:1.8em;
+	font-weight:600;
+}
+
+#logo{
+	margin:10px 0;
+}
+
+.featured-title {
+	font-size:  45px;
+}
+
+.menu{
+	box-shadow: 2px 2px 2px;
+	border-radius: 3px;
+}
