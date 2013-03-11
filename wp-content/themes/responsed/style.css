@@ -23,3 +23,21 @@ h1{
 	box-shadow: 2px 2px 2px;
 	border-radius: 3px;
 }
+
+#featured-image{
+	margin:0;
+}
+
+#featured{
+	background-image: url('/wp-content/uploads/2013/03/banner_2.jpg');
+	color: white;
+	text-shadow: 3px -2px 3px #000;
+}
+
+a{
+	color:#844;
+}
+
+a:hover{
+	color:#06c;
+}
