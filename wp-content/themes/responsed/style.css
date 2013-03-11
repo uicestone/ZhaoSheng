@@ -17,6 +17,13 @@ h1{
 
 .featured-title {
 	font-size:  45px;
+	padding-bottom: 5px;/*IE下加阴影后，标题底部别截去了一些*/
+}
+
+.featured-title, .featured-subtitle,#featured p{
+	color: white;
+	filter: progid:DXImageTransform.Microsoft.Shadow(color='#222', Direction=135, Strength=2);
+	text-shadow: 0.1em -0.05em 0.1em #000;
 }
 
 .menu{
@@ -30,8 +37,6 @@ h1{
 
 #featured{
 	background-image: url('/wp-content/uploads/2013/03/banner_2.jpg');
-	color: white;
-	text-shadow: 3px -2px 3px #000;
 }
 
 a{
