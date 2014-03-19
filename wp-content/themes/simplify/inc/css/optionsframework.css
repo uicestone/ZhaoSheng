@@ -256,14 +256,13 @@
 
 /* ----------------------- Custom ---------------------- */
 #optionsframework .donation  {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.5;
-    text-shadow: 0 0 3px #DDDDDD;
 }
 
 #optionsframework .donation a {
    	text-decoration: none;
-    color: #F60;
+    color: #14aafd;
 }
 
 #optionsframework .featured-area-title {
@@ -281,3 +280,7 @@ textarea, input[type="text"], input[type="password"], input[type="file"], input[
     padding: 5px;
 	line-height: 1.5;
 }
+
+.infohead { background:url("../../images/logo-op.png") no-repeat scroll right bottom #333333; border: 3px solid #14AAFD; border-radius: 10px; color: #EEEEEE; padding: 10px; text-shadow: -1px -1px 0 #000000; transition:all .75s; -moz-transition:all .75s; -o-transition:all .75s; -webkit-transition:all .75s; font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;}
+.infohead:hover { background: url("../../images/logo-op.png") no-repeat scroll right bottom #111111; border: 3px solid #ee510c; }
+a.extendlink { float: right; height: 50px; width: 290px; }

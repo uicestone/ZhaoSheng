@@ -1,13 +1,11 @@
 <?php
 /* 	Simplify Theme's Functions
-	Copyright: 2012, D5 Creation, www.d5creation.com
+	Copyright: 2012-2013, D5 Creation, www.d5creation.com
 	Based on the Simplest D5 Framework for WordPress
 	Since Simplify 1.0
 */
    
   
-  	add_theme_support( 'automatic-feed-links' );
-  	register_nav_menus( array( 'main-menu' => "Main Menu" ) );
 
 //	Set the content width based on the theme's design and stylesheet.
 	if ( ! isset( $content_width ) ) $content_width = 584;
@@ -15,7 +13,7 @@
 // Load the D5 Framework Optios Page
 	if ( !function_exists( 'optionsframework_init' ) ) {
 	define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/' );
-	require_once dirname( __FILE__ ) . '/inc/options-framework.php';
+	require_once get_template_directory() . '/inc/options-framework.php';
 	}
 
 // 	Tell WordPress for wp_title in order to modify document title content
@@ -26,21 +24,20 @@
 	}
 	add_filter( 'wp_title', 'simplify_filter_wp_title' );
 
-
+	function simplify_setup() {
 // 	Tell WordPress for the Feed Link
 	add_editor_style();
 	add_theme_support( 'automatic-feed-links' );
+	register_nav_menus( array( 'main-menu' => "Main Menu" ) );
 	
 // 	This theme uses Featured Images (also known as post thumbnails) for per-post/per-page Custom Header images
-	if ( function_exists( 'add_theme_support' ) ) { 
 	add_theme_support( 'post-thumbnails' );
 	set_post_thumbnail_size( 150, 150, true ); // default Post Thumbnail dimensions (cropped)
 
 	// additional image sizes
 	// delete the next line if you do not need additional image sizes
 	add_image_size( 'category-thumb', 300, 9999 ); //300 pixels wide (and unlimited height)
-	}
-	
+		
 		
 // 	WordPress 3.4 Custom Background Support	
 	$simplify_custom_background = array( 'default-color' => 'ffffff', );
@@ -56,51 +53,33 @@
 	'flex-width'             => true,
 	'default-text-color'     => 'AAAAAA',
 	'header-text'            => false,
-	'uploads'                => True,
+	'uploads'                => true,
 	'wp-head-callback' 		 => '',
 	'admin-head-callback'    => '',
 	'admin-preview-callback' => '',
 	);
 	add_theme_support( 'custom-header', $simplify_custom_header );
+	}
+	add_action( 'after_setup_theme', 'simplify_setup' );
 
 // 	Functions for adding script
-	function simplify_enqueue_scripts() { ?>
-	<!--[if lt IE 9]>
-	<?php wp_enqueue_script( 'html5forie', get_template_directory_uri(). '/js/html5.js'); ?>
-	<![endif]-->
-	<?php
+	function simplify_enqueue_scripts() { 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) { 
 		wp_enqueue_script( 'comment-reply' ); 
 	}
-	
+	wp_enqueue_style('simplify-style', get_stylesheet_uri(), false );
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'd5corporate-menu-style', get_template_directory_uri(). '/js/menu.js' );
-	wp_enqueue_style('d5corporate-gfonts1', 'http://fonts.googleapis.com/css?family=Poiret+One', false );
-	wp_enqueue_style('d5corporate-gfonts2', 'http://fonts.googleapis.com/css?family=Anaheim', false );
+	wp_enqueue_script( 'simplify-menu-style', get_template_directory_uri(). '/js/menu.js' );
+	wp_register_style('simplify-gfonts1', '//fonts.googleapis.com/css?family=Poiret+One', false );
+	wp_register_style('simplify-gfonts2', '//fonts.googleapis.com/css?family=Anaheim', false );
+	wp_enqueue_style('simplify-gfonts1');
+	wp_enqueue_style('simplify-gfonts2');
+	if ( of_get_option('responsive', '0') == '1' ) : wp_enqueue_style('simplify-responsive', get_template_directory_uri(). '/style-responsive.css' ); endif;
 	}
 	add_action( 'wp_enqueue_scripts', 'simplify_enqueue_scripts' );
-
-
-// 	Functions for adding some custom code within the head tag of site
-	function simplify_custom_code() {
-?>
-	
-	<style type="text/css">
-	.site-title a, 
-	.site-title a:active, 
-	.site-title a:hover {
-	
-	color: #<?php echo get_header_textcolor(); ?>;
-	}
-	</style>
-		
-<?php 
-	}
-	
-	add_action('wp_head', 'simplify_custom_code');
 	
 //	function tied to the excerpt_more filter hook.
-	function simplify_excerpt_length( $length ) {
+	function simplify_excerpt_length( $Length ) {
 	global $simplifyExcerptLength;
 	if ($simplifyExcerptLength) {
     return $simplifyExcerptLength;
@@ -123,7 +102,7 @@
 	function simplify_widgets_init() {
 
 	register_sidebar( array(
-		'name' => __( 'Primary Sidebar', 'simplify' ),
+		'name' => 'Primary Sidebar', 
 		'id' => 'sidebar-1',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => "</aside>",
@@ -132,7 +111,7 @@
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'Secondary Sidebar', 'simplify' ),
+		'name' =>  'Secondary Sidebar', 
 		'id' => 'sidebar-2',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => "</aside>",
@@ -141,9 +120,9 @@
 	) );
 	 
 	register_sidebar( array(
-		'name' => __( 'Footer Area One', 'simplify' ),
+		'name' => 'Footer Area One', 
 		'id' => 'sidebar-3',
-		'description' => __( 'An optional widget area for your site footer', 'simplify' ),
+		'description' => 'An optional widget area for your site footer', 
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
@@ -151,9 +130,9 @@
 	) );
 	    
 	register_sidebar( array(
-		'name' => __( 'Footer Area Two', 'simplify' ),
+		'name' => 'Footer Area Two', 
 		'id' => 'sidebar-4',
-		'description' => __( 'An optional widget area for your site footer', 'simplify' ),
+		'description' => 'An optional widget area for your site footer',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
@@ -161,9 +140,9 @@
 	) );
 
 	register_sidebar( array(
-		'name' => __( 'Footer Area Three', 'simplify' ),
+		'name' => 'Footer Area Three',
 		'id' => 'sidebar-5',
-		'description' => __( 'An optional widget area for your site footer', 'simplify' ),
+		'description' => 'An optional widget area for your site footer', 
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
@@ -172,9 +151,9 @@
 	
 	
 	register_sidebar( array(
-		'name' => __( 'Footer Area Four', 'simplify' ),
+		'name' =>  'Footer Area Four', 
 		'id' => 'sidebar-6',
-		'description' => __( 'An optional widget area for your site footer', 'simplify' ),
+		'description' =>  'An optional widget area for your site footer', 
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => "</aside>",
 		'before_title' => '<h3 class="widget-title">',
