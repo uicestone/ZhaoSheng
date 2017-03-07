@@ -35,7 +35,7 @@ Class Responsive_Options {
 		$this->options            = $options;
 		$this->responsive_options = get_option( 'responsive_theme_options' );
 		// Set confirmaton text for restore default option as attributes of submit_button().
-		$this->attributes['onclick'] = 'return confirm("' . __( 'Do you want to restore? \nAll theme settings will be lost! \nClick OK to Restore.', 'responsive' ) . '")';
+		$this->attributes['onclick'] = 'return confirm("' . __( 'Do you want to restore?', 'responsive' ) . '\n' . __( 'All theme settings will be lost!', 'responsive' ) . '\n' . __( 'Click OK to Restore.', 'responsive' ) . '")';
 	}
 
 	/**
@@ -47,10 +47,55 @@ Class Responsive_Options {
 	 */
 	public function render_display() {
 		$html = '';
+		$i=1;
+		
+		foreach( $this->sections as $section ) {
+			$this->display_title( $section['id'], $section['title'],$i++);
+		}
+		$i=1;
+		echo '<ul>';
 		foreach( $this->sections as $section ) {
 			$sub = $this->options[$section['id']];
-			$this->container( $section['title'], $sub );
+			$this->display_data($section['id'],$sub,$i++);
 		}
+		echo '</ul>';
+	}
+	
+	protected function display_title( $id, $title ,$i ) {
+	
+		$check ='';
+		
+		if ($i == '1')
+			$check = 'checked=checked';
+			
+		echo '<input type="radio"' . $check . ' name="sky-tabs" id="sky-'. $id .'"  class="sky-tab-content-' . $i . '">';
+		echo '<label for="sky-' . $id . '"><span><span><i class="fa fa-bolt"></i>' . esc_html ($title) . ' </span></span></label>';
+	
+	}
+	
+	/**
+	 * Creates main sections title and container
+	 *
+	 * Loops through the options array
+	 *
+	 * @param $title string
+	 * @param $sub array
+	 *
+	 * @return string
+	 */
+	protected function display_data( $id, $sub, $i ) {
+	
+		echo '<li class="sky-tab-content-'. $i . '">
+			  <div class="typography">';
+		//echo '<p>';
+		foreach( $sub as $opt ) {
+			echo $this->sub_heading( $this->parse_args( $opt ) );
+			echo $this->section( $this->parse_args( $opt ) );
+		}
+		echo $this->save();
+		//echo '</p>';
+		echo '</div>	 </li>';
+	
 	}
 
 	/**
@@ -89,7 +134,7 @@ Class Responsive_Options {
 	protected function sub_heading( $args ) {
 
 		// If width is not set or it's not set to full then go ahead and create default layout
-		if( !isset( $args['width'] ) || $args['width'] != 'full' ) {
+		if ( !isset( $args['width'] ) || $args['width'] != 'full' ) {
 			echo '<div class="grid col-300">';
 
 			echo $args['title'];
@@ -115,7 +160,7 @@ Class Responsive_Options {
 		// If the width is not set to full then create normal grid size, otherwise create full width
 		$html = ( !isset( $options['width'] ) || $options['width'] != 'full' ) ? '<div class="grid col-620 fit">' : '<div class="grid col-940">';
 
-		$html .= $this->$options['type']( $options );
+		$html .= $this->{$options['type']}( $options );
 
 		$html .= '</div>';
 
@@ -240,7 +285,7 @@ Class Responsive_Options {
 				' . get_submit_button( __( 'Save Options', 'responsive' ), 'primary', 'responsive_theme_options[submit]', false ) .
 			get_submit_button( __( 'Restore Defaults', 'responsive' ), 'secondary', 'responsive_theme_options[reset]', false, $this->attributes ) . '
                 <a href="http://cyberchimps.com/store/responsivepro/" class="button upgrade">' . __( 'Upgrade', 'responsive' ) . '</a>
-                </p>
+                </p>                
                 </div>';
 
 	}
@@ -313,7 +358,7 @@ Class Responsive_Options {
 
 		$html = '<div class="tinymce-editor">';
 		ob_start();
-		$html .= wp_editor( $value, 'responsive_theme_options[' . $id . ']', $editor_settings );
+		$html .= wp_editor( $value, 'responsive_theme_options_' . $id . '_', $editor_settings );
 		$html .= ob_get_contents();
 		$html .= '<label class="description" for="' . esc_attr( 'responsive_theme_options[' . $id . ']' ) . '">' . esc_html( $description ) . '</label>';
 		$html .= '</div>';

@@ -10,17 +10,19 @@ class CGB_Admin_Settings {
 	private static $instance;
 	private $options;
 
-	private function __construct() {
-		$this->options = &CGB_Options::get_instance();
-	}
-
 	public static function &get_instance() {
 		// Create class instance if required
 		if(!isset(self::$instance)) {
-			self::$instance = new CGB_Admin_Settings();
+			self::$instance = new self();
 		}
 		// Return class instance
 		return self::$instance;
+	}
+
+
+	private function __construct() {
+		$this->options = &CGB_Options::get_instance();
+		$this->options->load_options_helptexts();
 	}
 
 	// show the admin settings page as a submenu of "Settings"
@@ -38,11 +40,11 @@ class CGB_Admin_Settings {
 		// show options
 		$out = '
 			<div class="wrap nosubsub" style="padding-bottom:15px">
-			<div id="icon-edit-comments" class="icon32"><br /></div><h2>Comment Guestbook Settings</h2>
+			<div id="icon-edit-comments" class="icon32"><br /></div><h2>'.__('Comment Guestbook Settings','comment-guestbook').'</h2>
 			</div>';
 		$out .= $this->show_sections($tab);
-		$out .= '<div id="posttype-page" class="posttypediv">';
 		$out .= '
+			<div id="posttype-page" class="posttypediv">
 			<form method="post" action="options.php">
 			';
 		ob_start();
@@ -101,11 +103,14 @@ class CGB_Admin_Settings {
 					case 'radio':
 						$out .= $this->show_radio($oname, $this->options->get($oname), $o['caption']);
 						break;
+					case 'number':
+						$out .= $this->show_number($oname, $this->options->get($oname), $o['range']);
+						break;
 					case 'text':
 						$out .= $this->show_text($oname, $this->options->get($oname));
 						break;
 					case 'textarea':
-						$out .= $this->show_textarea($oname, $this->options->get($oname));
+						$out .= $this->show_textarea($oname, $this->options->get($oname), (isset($o['rows']) ? $o['rows'] : null));
 						break;
 				}
 				$out .= '
@@ -154,15 +159,25 @@ class CGB_Admin_Settings {
 		return $out;
 	}
 
-	private function show_text($name, $value) {
+	private function show_number($name, $value, $range=array('min_value' => 0)) {
+		$step = isset($range['step']) ? $range['step'] : '1';
+		$min = isset($range['min_value']) ? ' min="'.intval($range['min_value']).'"' : '';
+		$max = isset($range['max_value']) ? ' max="'.intval($range['max_value']).'"' : '';
 		$out = '
-							<input name="'.$name.'" type="text" id="'.$name.'" style="width:230px" value="'.$value.'" />';
+							<input name="'.$name.'" type="number", id="'.$name.'" step="'.$step.'"'.$min.$max.' value="'.intval($value).'" />';
 		return $out;
 	}
 
-	private function show_textarea($name, $value) {
+	private function show_text($name, $value) {
 		$out = '
-							<textarea name="'.$name.'" id="'.$name.'" rows="12" class="large-text code">'.$value.'</textarea>';
+							<input name="'.$name.'" type="text" id="'.$name.'" style="width:25em" value="'.htmlentities($value).'" />';
+		return $out;
+	}
+
+	private function show_textarea($name, $value, $rows=null) {
+		$rows_text = (null == $rows) ? '' : ' rows="'.$rows.'"';
+		$out = '
+							<textarea name="'.$name.'" id="'.$name.'"'.$rows_text.' class="large-text code">'.htmlentities($value).'</textarea>';
 		return $out;
 	}
 }

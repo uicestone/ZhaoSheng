@@ -1,6 +1,6 @@
 <?php
-if(!defined('ABSPATH')) {
-	exit;
+if(!defined('WPINC')) {
+	die;
 }
 
 require_once(CGB_PATH.'includes/options.php');
@@ -15,11 +15,10 @@ class CGB_Admin {
 	}
 
 	public static function &get_instance() {
-		// Create class instance if required
+		// singleton setup
 		if(!isset(self::$instance)) {
-			self::$instance = new CGB_Admin();
+			self::$instance = new self;
 		}
-		// Return class instance
 		return self::$instance;
 	}
 
@@ -33,9 +32,9 @@ class CGB_Admin {
 	 * Add and register all admin pages in the admin menu
 	 */
 	public function register_pages() {
-		$page = add_submenu_page('edit-comments.php', 'About Comment Guestbook', 'About Guestbook', 'edit_posts', 'cgb_admin_main', array(&$this, 'show_about_page'));
+		$page = add_submenu_page('edit-comments.php', sprintf(__('About %1$s','comment-guestbook'), 'Comment Guestbook'), __('About Guestbook','comment-guestbook'), 'edit_posts', 'cgb_admin_about', array(&$this, 'show_about_page'));
 		add_action('admin_print_scripts-'.$page, array(&$this, 'embed_about_scripts'));
-		$page = add_submenu_page('options-general.php', 'Comment Guestbook Settings', 'Guestbook', 'manage_options', 'cgb_admin_options', array(&$this, 'show_settings_page'));
+		$page = add_submenu_page('options-general.php', __('Comment Guestbook Settings','comment-guestbook'), __('Guestbook','comment-guestbook'), 'manage_options', 'cgb_admin_options', array(&$this, 'show_settings_page'));
 		add_action('admin_print_scripts-'.$page, array(&$this, 'embed_settings_scripts'));
 	}
 

@@ -1,20 +1,20 @@
 /*
 Theme Name: Simplify
-Theme URI: http://d5creation.com/themes/simplify/
+Theme URI: http://d5creation.com/themes/simplify
 
 Author: D5 Creation
 Author URI: http://d5creation.com/
 
-Description: Simplify is a CSS3 Powered and WordPress 3.5 Ready Responsive Theme for Small Business Companies. Customizable Background and other options will give the WordPress Driven Site an attractive look.  Simplify is super elegant and Professional Responsive Theme which will be adjusted automatically with all smart devices.  Right and Footer Sidebar will be usable for showing the widgets. Full Wide Template can be used for showing showcase or other pages. You can Visit the Simplify Demo <a href="http://demo.d5creation.com/wp/themes/simplify/" target="_blank"><strong>Here</strong></a>. Minimum Requirement: WordPress 3.5.1
+Description: Simplify is a CSS3 Powered and WordPress Latest Version Ready Responsive Theme for Small Business Companies. Exciting Slide, 02 Rows of Featured Boxes, Customizable Background and other options will give the WordPress Driven Site an attractive look.  Simplify is super Elegant and Professional Responsive Theme which will be adjusted automatically with all smart devices. First and Second Row Featured Boxes can show your company's Featured Items, Services etc.  Right and Footer Sidebar will be usable for showing the widgets. Full Wide Template can be used for showing showcase or other pages. Simplify is Translation Ready. You can Visit the Simplify Demo Here: http://demo.d5creation.com/themes/?theme=Simplify and can visit the Theme page here: http://d5creation.com/theme/simplify
 
-Version: 2.2
+Version: 4.3
 
-Tags: gray, light, two-columns, right-sidebar, fixed-width, black, blue, custom-header, custom-background, custom-menu, threaded-comments, sticky-post, rtl-language-support, front-page-post-form, full-width-template, theme-options  
+Tags: two-columns, right-sidebar, custom-header, custom-background, custom-menu, threaded-comments, sticky-post, rtl-language-support, full-width-template, translation-ready, blog, education, food-and-drink, featured-images, portfolio, photography, theme-options  
 
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simplify WordPress Theme, Copyright 2012-2013: D5 Creation (www.d5creation.com)
+Simplify WordPress Theme, Copyright 2012-2014: D5 Creation (www.d5creation.com)
 Simplify is distributed under the terms of the GNU GPL
 
 Text Domain: simplify
@@ -74,33 +74,42 @@ a img.aligncenter{display:block;margin-left:auto;margin-right:auto}
 .wp-caption p.wp-caption-text{font-size:11px;line-height:17px;margin:0;padding:0 4px 5px;}
 body{color:#6a6969;font-family:'Anaheim', sans-serif;font-size:14px;line-height:1.15;min-width:950px;word-wrap:break-word;}
 div, p, a, li, img{transition:all 2s;-moz-transition:all 2s;-o-transition:all 2s;-webkit-transition:all 2s;}
+#slide div, #slide p, #slide a, #slide li, #slide img{transition:none;-moz-transition:none;-o-transition:none;-webkit-transition:none;}
 img{max-width:100%;border:0 none;}
 #container{width:930px;margin:40px auto;}
 #header{height:90px;background:url("images/header.png") repeat-x scroll 0 0 #333333;}
 #header-bottom{background:url("images/header-bottom.png") no-repeat scroll center top #3c4143;height:400px;margin:-7px 0 -410px;}
-img.site-logo{max-width:250px;max-height:70px;padding:5px 0;float:left;}
+img.site-logo, .site-title {max-width:250px;max-height:70px;padding:5px 0;float:left;}
+.site-title { padding: 20px 0; font-size: 35px; text-transform: uppercase; max-width: 300px; }
 #header-content{width:930px;margin:auto;}
 .site-title-hidden{display:none;}
 #content{float:left;width:70%;}
 #content-full{width:930px;}
 .content-ver-sep{background:none repeat scroll 0 0 #CCCCCC;border-bottom:1px solid #FFFFFF;clear:both;height:1px;}
-.lsep{background:url("images/lsep.png") no-repeat scroll top center #CCCCCC;clear:both;height:20px;margin:10px auto;}
-#right-sidebar{float:right;width:25%;}
-#footer{background:url("images/footer.png") repeat-x scroll 0 0 #26292B;border-bottom:50px solid #111111;clear:both;padding:0px;min-width:930px;}
+.lsep{background:url("images/lsep.png") no-repeat scroll top center #CCCCCC;clear:both;height:5px;margin:10px auto;}
+#right-sidebar{float:right;width:27%;}
+#footer{background:url("images/footer.png") repeat-x scroll 0 0 #26292B;border-bottom:50px solid #111111;clear:both;padding:0px;min-width:930px; border-top: 10px solid #000000;}
 .versep{background:none repeat scroll 0 0 #111111;border-bottom:1px solid #222222;border-top:80px solid #222222;height:2px;}
 #footer-content{width:930px;margin:0 auto;}
 #social{display:table;height:50px;margin:-70px auto 30px;padding:0 10px 10px;}
+
 .facebook-link,
 .twitter-link,
 .youtube-link,
+.gplus-link,
+.picassa-link,
 .li-link,
 .feed-link{float:left;height:50px;width:50px;}
-.facebook-link{background:url("images/fbicon.png") no-repeat scroll center top transparent;}
-.facebook-link:hover{background:url("images/fbicon.png") no-repeat scroll center bottom transparent;}
-.twitter-link{background:url("images/twittericon.png") no-repeat scroll center top transparent;margin:0 20px 0 40px;}
+.facebook-link{background:url("images/facebookicon.png") no-repeat scroll center top transparent;margin:0 20px;}
+.facebook-link:hover{background:url("images/facebookicon.png") no-repeat scroll center bottom transparent;}
+.twitter-link{background:url("images/twittericon.png") no-repeat scroll center top transparent;margin:0 20px;}
 .twitter-link:hover{background:url("images/twittericon.png") no-repeat scroll center bottom transparent;}
 .youtube-link{background:url("images/youtubeicon.png") no-repeat scroll center top transparent;margin:0 20px;}
 .youtube-link:hover{background:url("images/youtubeicon.png") no-repeat scroll center bottom transparent;}
+.gplus-link{background:url("images/gplusicon.png") no-repeat scroll center top transparent;margin:0 20px;}
+.gplus-link:hover{background:url("images/gplusicon.png") no-repeat scroll center bottom transparent;}
+.picassa-link{background:url("images/picassaicon.png") no-repeat scroll center top transparent;margin:0 20px;}
+.picassa-link:hover{background:url("images/picassaicon.png") no-repeat scroll center bottom transparent;}
 .li-link{background:url("images/liicon.png") no-repeat scroll center top transparent;margin:0 40px 0 20px;}
 .li-link:hover{background:url("images/liicon.png") no-repeat scroll center bottom transparent;}
 .feed-link{background:url("images/feedicon.png") no-repeat scroll center top transparent;}
@@ -108,6 +117,7 @@ img.site-logo{max-width:250px;max-height:70px;padding:5px 0;float:left;}
 #footer-sidebar{overflow:hidden;padding-top:20px;}
 #creditline{color:#8A96A0;font-size:13px;margin-bottom:-40px;text-align:center;padding: 5px;}
 #creditline a{font-weight:bold;}
+
 #simplify-main-menu{color:#EEEEEE;float:right;line-height:1;max-width:650px;}
 #simplify-main-menu ul{list-style:none outside none;}
 #simplify-main-menu li{float:left;position:relative;margin:0 5px;}
@@ -129,6 +139,7 @@ img.site-logo{max-width:250px;max-height:70px;padding:5px 0;float:left;}
 #simplify-main-menu ul ul .current_page_item > a,
 #simplify-main-menu ul ul .current_page_ancestor > a{background:#555555;color:#EEEEEE;border-bottom:1px solid #BFBFBF;}
 #simplify-main-menu ul li:hover > ul{display:block;}
+
 .widget{display:block;word-wrap:break-word;}
 #right-sidebar .widget{background:none repeat scroll 0 0 #CCCCCC;margin-bottom:20px;padding:15px;}
 #right-sidebar .widget h3{color:#555555;padding-bottom:5px;text-transform:uppercase;}
@@ -241,10 +252,10 @@ input#s{width:70%;min-width:235px;}
 #slide{width:930px;height:350px;overflow:hidden;}
 #slide-container a, #slide{transition:none;-moz-transition:none;-o-transition:none;-webkit-transition:none;}
 #slide img{width:930px;height:350px;overflow:hidden;}
-#ft-buttons-slide{text-align:center;padding-top:5px;width:930px;display:none;}
-#ft-prev-slide, #ft-next-slide{width:40px;height:40px;opacity:.1;}
-a#ft-prev-slide{background:url("images/slide-pre.png") no-repeat scroll 0 0 transparent;}
-a#ft-next-slide{background:url("images/slide-next.png") no-repeat scroll 0 0 transparent;}
+#ft-buttons-slide{text-align:left;margin:-30px 30px 0;width:870px; font-size: 0px; position: absolute; position: absolute;}
+.ft-button-slide { background: transparent; border-radius: 50%; margin: 0 5px; border: 2px solid #FFFFFF; border: 2px solid rgba(255,255,255,.5); width: 1px; height: 1px; display: inline-block;  }
+.ft-button-slide-active { background: #FFFFFF; background: rgba(255,255,255,.7); }
+
 #ft-title-slide{position:absolute;bottom:0pt;margin-left:400px;z-index:1000;opacity:1;width:500px;font-size:15px;}
 #ft-title-slide blockquote{background:#EEEEEE;background:rgba(255, 255, 255, 0.70);color:#333333;font-size:17px;text-align:right;box-shadow:0 0 5px 0 #999999;border-left:10px solid #999999;border-right:10px solid #999999;}
 #ft-title-slide blockquote h3{margin:0;}
@@ -329,6 +340,10 @@ h2#client-text.post-title{color:#888A8A;opacity:0.7;padding:10px 0;text-align:ce
 #client img{margin:0 13px;max-height:100px;vertical-align:middle;width:100px;}
 #f-post-page { margin: 10px auto; width: 100%; font-size: 15px; cursor: pointer; text-align: center; font-weight: bold; } 
 #f-post-page-container { display: none; }
+/* Text meant only for screen readers. */
+.screen-reader-text { clip: rect(1px, 1px, 1px, 1px); position: absolute !important; height: 1px; width: 1px; overflow: hidden; }
+.screen-reader-text:focus { background-color: #f1f1f1; border-radius: 3px; box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6); clip: auto !important; color: #21759b; 	display: block; font-size: 14px; font-size: 0.875rem; font-weight: bold; height: auto; left: 5px; line-height: normal; padding: 15px 23px 14px; 	text-decoration: none; top: 5px; width: auto; z-index: 100000; /* Above WP toolbar. */ }
+
 
 /* =Media Print
 -------------------------------------------------------------- */

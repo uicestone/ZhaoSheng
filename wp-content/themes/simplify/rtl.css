@@ -1,25 +1,26 @@
 /*
 Theme Name: Simplify
-Theme URI: http://d5creation.com/themes/simplify/
+Theme URI: http://d5creation.com/themes/simplify
 
 Author: D5 Creation
 Author URI: http://d5creation.com/
 
-Description: Simplify is a CSS3 Powered and WordPress 3.5 Ready Responsive Theme for Small Business Companies. Customizable Background and other options will give the WordPress Driven Site an attractive look.  Simplify is super elegant and Professional Responsive Theme which will be adjusted automatically with all smart devices.  Right and Footer Sidebar will be usable for showing the widgets. Full Wide Template can be used for showing showcase or other pages. You can Visit the Simplify Demo <a href="http://demo.d5creation.com/wp/themes/simplify/" target="_blank"><strong>Here</strong></a>. Minimum Requirement: WordPress 3.5.1
+Description: Simplify is a CSS3 Powered and WordPress Latest Version Ready Responsive Theme for Small Business Companies. Exciting Slide, 02 Rows of Featured Boxes, Customizable Background and other options will give the WordPress Driven Site an attractive look.  Simplify is super Elegant and Professional Responsive Theme which will be adjusted automatically with all smart devices. First and Second Row Featured Boxes can show your company's Featured Items, Services etc.  Right and Footer Sidebar will be usable for showing the widgets. Full Wide Template can be used for showing showcase or other pages. Simplify is Translation Ready. You can Visit the Simplify Demo Here: http://demo.d5creation.com/themes/?theme=Simplify and can visit the Theme page here: http://d5creation.com/theme/simplify
 
-Version: 2.2
+Version: 4.3
 
-Tags: gray, light, two-columns, right-sidebar, fixed-width, black, blue, custom-header, custom-background, custom-menu, threaded-comments, sticky-post, rtl-language-support, front-page-post-form, full-width-template, theme-options  
+Tags: two-columns, right-sidebar, custom-header, custom-background, custom-menu, threaded-comments, sticky-post, rtl-language-support, full-width-template, translation-ready, blog, education, food-and-drink, featured-images, portfolio, photography, theme-options  
 
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simplify WordPress Theme, Copyright 2012: D5 Creation (www.d5creation.com)
+Simplify WordPress Theme, Copyright 2012-2014: D5 Creation (www.d5creation.com)
 Simplify is distributed under the terms of the GNU GPL
 
 Text Domain: simplify
 
 */
+
 /* =Reset default browser CSS. Based on work by Eric Meyer: http://meyerweb.com/eric/tools/css/reset/index.html
 -------------------------------------------------------------- */
 
@@ -84,16 +85,12 @@ img.site-logo {
 	float:left;
 }
 
-.facebook-link,
-.twitter-link,
 .youtube-link,
+.gplus-link,
+.picassa-link,
 .li-link,
 .feed-link {
 	float:right;
-}
-
-.twitter-link {
-	margin:0 40px 0 20px;
 }
 
 .li-link {
@@ -180,6 +177,10 @@ input[type="submit"]:hover {
 	background:url("images/sticky.png") no-repeat scroll left top #F2F2F2;
 }
 
+#ft-buttons-slide {
+	text-align:right;
+}
+
 #ft-title-slide {
 	margin-right:400px;
 	margin-left: auto;
@@ -219,17 +220,17 @@ h3.featured-box2 {
 	float:right;
 }
 
-blockquote {
+blockquote, q {
 	border-right:10px solid #ccc;
 	border-left:10px solid #ccc;
 }
 
-blockquote:before {
+blockquote:before, q:before {
 	margin-left:.20em;
 	margin-right: auto;
 }
 
-blockquote:after {
+blockquote:after, q:after {
 	margin-right:.20em;
 	margin-left: auto;
 }
@@ -280,5 +281,11 @@ h2.post-title-color {
 
 #commentsbox .commentlist .children li {
 	margin:0 -25px 0 0;
+}
+
+/* =Media Print
+-------------------------------------------------------------- */
+@media print {
+
 }
 

@@ -3,8 +3,8 @@ Contributors: mibuthu
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=W54LNZMWF9KW2
 Tags: comment, guestbook, site, comments, integrated, shortcode, modify, list, form
 Requires at least: 3.3
-Tested up to: 3.8.1
-Stable tag: 0.6.2
+Tested up to: 4.8
+Stable tag: 0.7.3
 Plugin URI: http://wordpress.org/extend/plugins/comment-guestbook/
 Licence: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -36,7 +36,14 @@ Simply insert the shortcode `[comment-guestbook]` into a page to enable this plu
 
 On the admin page (goto Comments -> About Guestbook) you can find a detailed description. In the admin area you can find a settings page with a lot of options to modify the behavior and output.
 
-If you want to follow the development status have a look at the [git-repository on github](https://github.com/mibuthu/wp-comment-guestbook "wp-comment-guestbook git-repository").
+= Development: =
+If you want to follow the development status have a look at the [git-repository on github](https://github.com/mibuthu/wp-comment-guestbook "wp-comment-guestbook at github").
+Feel free to add your merge requests there, if you want to help to improve the plugin.
+
+= Translations: =
+Please help translating this plugin into multiple languages.
+You can submit your translations at [transifex.com](https://www.transifex.com/projects/p/wp-comment-guestbook "wp-comment-guestbook at transifex").
+There the source strings will always be in sync with the actual development version.
 
 
 == Installation ==
@@ -55,9 +62,9 @@ You can find a lot of options on the admin page in the submenu "Comments" -> "Gu
 Please check if comments are enabled for your guestbook page. There are several places to change these setting:
 
 * General wordpress discussion setting (Settings -> Discussion -> "Allow people to post comments on new articles"): This setting changes the behavior for all pages and post, but can be overwritten by the settings below.
-* Post/page discussion setting (Discussion box -> "Allow comments." in post/page edit screen): This setting overwrites the general wordpress setting for each page or post. If you cannot see the Discussion box you have to enable it in the Screen Option.
-* Theme settings: A lot of themes have their own options for displaying the comment list. They often will overwrite the wordpress settings.
-* Guestbook settings (Comments -> Guestbook -> General Settings -> "Guestbook comment status": This option will overwrite the wordpress settings for the guestbook page. But the theme settings can still causes problems.
+* Post/page discussion setting (Discussion box -> "Allow comments." in post/page edit screen): This setting overrides the general wordpress setting for each page or post. If you cannot see the Discussion box you have to enable it in the Screen Option.
+* Theme settings: A lot of themes have their own options for displaying the comment list. They often will override the wordpress settings.
+* Guestbook settings (Comments -> Guestbook -> General Settings -> "Guestbook comment status": This option will override the wordpress settings for the guestbook page. But the theme settings can still causes problems.
 
 If you still have problems after checking all these possibilities there is one more option available in the Guestbook settings (Comments -> Guestbook -> Comment-list settings -> "Show the comment list in the page content".
 If you enable this option the comment list will be displayed in the page content instead of the seperate comment section. After that the comment list should be displayed also with themes which specifies no comment section for pages.
@@ -81,6 +88,65 @@ Yes, you can create an instance of the "SC_Comment_Guestbook" class which locate
 10. Example guestbook widget
 
 == Changelog ==
+
+= 0.7.3 (2017-02-11) =
+* added option to ignore comment moderation in the guestbook page
+* added option to ignore name/email requirement in the guestbook page
+* fixed incorrect html code in the widget when text truncate is enabled
+* fixed displayed page number after a new comment with under some conditions
+* prepared more strings for translation
+* updated german translation
+* moved screenshots to assets folder to reduce download size
+
+= 0.7.2 (2017-01-21) =
+* added options to set collapsed comment forms and to set a link text for the button to expand the form
+* added options to override pagination and per page settings for the guestbook site
+* fixed option "Guestbook comment registration"
+* fixed option "Remove email field"
+* only print form styles once
+* security improvements for external links
+* added greek translation (thanks to Spirossmil, translation not fully completed yet)
+
+= 0.7.1 (2015-07-25) =
+* added option to add manual args for wp_comment_list function
+* fixes / improvements in truncate function
+* updated some helptexts
+* added some additional german translations
+
+= 0.7.0 (2015-05-25) =
+* added multi language support
+* added german translation (not fully complete yet)
+* added option to change "You must login" message
+
+= 0.6.9 (2015-03-28) =
+* added additional options for other pages/posts to remove mail or website field in comment form
+
+= 0.6.8 (2014-12-13) =
+* fixed problems with manual truncate function and unicode characters
+
+= 0.6.7 (2014-11-16) =
+* added automatic truncate support of texts via css
+* added unicode support for manual truncate function
+* fixed problem with special characters in textarea fields of settings page
+
+= 0.6.6 (2014-09-01) =
+* added option to override registration requirement for comments on guestbook pages (this option is enabled by default)
+* added option to enable/disable threaded comments on guestbook pages independent from wordpress settings
+* fixed problem that e-mail was still mandatory if e-mail field is hidden
+
+= 0.6.5 (2014-06-08) =
+* fixed an issue in comment list custom styles code which breaks the comment list
+
+= 0.6.4 (2014-06-08) =
+* added options for custom css styles in comment form and comment list
+* added option to show an additional title in front of the comment list
+
+= 0.6.3 (2014-04-13) =
+* added option to specify comment form args directly
+* show more number in pagination
+* small fix in truncate function
+* small css changes on admin page
+* added check if comment_callback_function exists
 
 = 0.6.2 (2014-03-09) =
 * added option to hide email and website form field

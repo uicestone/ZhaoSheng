@@ -1,7 +1,7 @@
 <?php
 
 // Exit if accessed directly
-if( !defined( 'ABSPATH' ) ) {
+if ( !defined( 'ABSPATH' ) ) {
 	exit;
 }
 
@@ -19,14 +19,17 @@ if( !defined( 'ABSPATH' ) ) {
  * @since          available since Release 1.0
  */
 ?>
+	<?php if(get_post_type() == 'page' && is_search()): ?>
+		<h1 class="entry-title post-title"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title(); ?></a></h1>
+	<?php else: ?>
+		<h1 class="entry-title post-title"><?php the_title(); ?></h1>
+	<?php endif; ?>
 
-	<h1 class="entry-title post-title"><?php the_title(); ?></h1>
-
-<?php if( comments_open() ) : ?>
+<?php if ( comments_open() ) : ?>
 	<div class="post-meta">
 		<?php responsive_post_meta_data(); ?>
 
-		<?php if( comments_open() ) : ?>
+		<?php if ( comments_open() ) : ?>
 			<span class="comments-link">
 		<span class="mdash">&mdash;</span>
 				<?php comments_popup_link( __( 'No Comments &darr;', 'responsive' ), __( '1 Comment &darr;', 'responsive' ), __( '% Comments &darr;', 'responsive' ) ); ?>

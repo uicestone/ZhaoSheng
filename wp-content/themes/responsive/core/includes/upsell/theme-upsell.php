@@ -20,19 +20,24 @@ function cyberchimps_upsell_style() {
 
 	// Set template directory uri
 	$directory_uri = get_template_directory_uri();
+	$suffix        = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
-	wp_enqueue_style( 'bootstrap', $directory_uri . '/core/includes/upsell/bootstrap/css/bootstrap.css' );
-	wp_enqueue_style( 'bootstrap-responsive', $directory_uri . '/core/includes/upsell/bootstrap/css/bootstrap-responsive.css', 'bootstrap' );
-	wp_enqueue_style( 'cyberchimps-responsive', $directory_uri . '/core/includes/upsell/bootstrap/css/cyberchimps-responsive.css', array( 'bootstrap', 'bootstrap-responsive' ) );
+	wp_enqueue_style( 'bootstrap', $directory_uri . '/core/includes/upsell/bootstrap/css/bootstrap' . $suffix . '.css' );
+	wp_enqueue_style( 'bootstrap-responsive', $directory_uri . '/core/includes/upsell/bootstrap/css/bootstrap-responsive' . $suffix . '.css', 'bootstrap' );
+	wp_enqueue_style( 'cyberchimps-responsive', $directory_uri . '/core/includes/upsell/bootstrap/css/cyberchimps-responsive' . $suffix . '.css', array( 'bootstrap', 'bootstrap-responsive' ) );
 
-	wp_enqueue_script( 'bootstrap-js', $directory_uri . '/core/includes/upsell/bootstrap/js/bootstrap.min.js', array( 'jquery' ) );
-
-	wp_enqueue_style( 'upsell_style', get_template_directory_uri() . '/core/includes/upsell/css/upsell.css' );
+	wp_enqueue_style( 'upsell_style', get_template_directory_uri() . '/core/includes/upsell/css/upsell' . $suffix . '.css' );
 }
 
 // Add upsell page to the menu.
 function cyberchimps_add_upsell() {
-	$page = add_theme_page( 'More Themes', 'More Themes', 'administrator', 'cyberchimps-themes', 'cyberchimps_display_upsell' );
+	$page = add_theme_page(
+		'More Themes',
+		'More Themes',
+		'administrator',
+		'cyberchimps-themes',
+		'cyberchimps_display_upsell'
+	);
 
 	add_action( 'admin_print_styles-' . $page, 'cyberchimps_upsell_style' );
 }
@@ -52,7 +57,7 @@ function cyberchimps_display_upsell() {
 					<div id="upsell_header" class="span12">
 						<h2>
 							<a href="http://cyberchimps.com" target="_blank">
-								<img src="<?php echo $directory_uri; ?>core/includes/upsell/images/upsell-logo.png"/>
+								<img src="<?php echo $directory_uri; ?>/core/includes/upsell/images/upsell-logo.png"/>
 							</a>
 						</h2>
 
@@ -80,7 +85,7 @@ function cyberchimps_display_upsell() {
 
 					// For currently active theme.
 					foreach ( $themes->themes as $theme ) {
-						if( $active_theme == $theme->name ) {?>
+						if ( $active_theme == $theme->name ) {?>
 
 							<div id="<?php echo $theme->slug; ?>" class="theme-container span4">
 								<div class="image-container">
@@ -104,7 +109,7 @@ function cyberchimps_display_upsell() {
 
 					// For all other themes.
 					foreach ( $themes->themes as $theme ) {
-						if( $active_theme != $theme->name ) {
+						if ( $active_theme != $theme->name ) {
 
 							// Set the argument array with author name.
 							$args = array(
@@ -134,7 +139,7 @@ function cyberchimps_display_upsell() {
 									<span class="theme-name"><?php echo $theme->name; ?></span>
 
 									<!-- Check if the theme is installed -->
-									<?php if( wp_get_theme( $theme->slug )->exists() ) { ?>
+									<?php if ( wp_get_theme( $theme->slug )->exists() ) { ?>
 
 										<!-- Show the tick image notifying the theme is already installed. -->
 										<img data-toggle="tooltip" title="Already installed" data-placement="bottom" class="theme-exists" src="<?php echo $directory_uri ?>/core/includes/upsell/images/tick.png"/>

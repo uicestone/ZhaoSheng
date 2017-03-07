@@ -1,5 +1,5 @@
 <?php
-if(!defined('ABSPATH')) {
+if(!defined('WPINC')) {
 	exit;
 }
 
@@ -20,7 +20,7 @@ class CGB_Widget extends WP_Widget {
 		parent::__construct(
 				'comment_guestbook_widget', // Base ID
 				'Comment Guestbook', // Name
-				array('description' => __('This widget displays a list of recent comments. If you want to enable a link to the guestbook page you have to insert a link address to the comment-guestbook page.', 'text_domain'),) // Args
+				array('description' => __('This widget displays a list of recent comments.','comment-guestbook'),) // Args
 		);
 		add_action('comment_post', array($this, 'flush_widget_cache'));
 		add_action('transition_comment_status', array($this, 'flush_widget_cache'));
@@ -28,134 +28,33 @@ class CGB_Widget extends WP_Widget {
 
 		// define all available items
 		$this->items = array(
-			'title' =>                array('type'          => 'text',
-			                                'std_value'     => __('Recent guestbook entries', 'text_domain'),
-			                                'caption'       => __('Title:'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('The title for the widget'),
-			                                'form_style'    => null,
-			                                'form_width'    => null),
-
-			'num_comments' =>         array('type'          => 'text',
-			                                'std_value'     => '5',
-			                                'caption'       => __('Number of comments:'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('The number of comments to display'),
-			                                'form_style'    => null,
-			                                'form_width'    => 30),
-
-			'link_to_comment' =>      array('type'          => 'checkbox',
-			                                'std_value'     => 'false',
-			                                'caption'       => __('Add a link to each comment'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('With this option you can add a link to the comment for every displayed comment.'),
-			                                'form_style'    => null,
-			                                'form_width'    => null),
-
-			'show_date' =>            array('type'          => 'checkbox',
-			                                'std_value'     => 'false',
-			                                'caption'       => __('Show comment date'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('This option defines if the comment date will be displayed.'),
-			                                'form_style'    => 'margin:0 0 0.2em 0',
-			                                'form_width'    => null),
-
-			'date_format' =>          array('type'          => 'text',
-			                                'std_value'     => get_option('date_format'),
-			                                'caption'       => __('Date format:'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('This option defines the displayed comment date format. You can use all available date formats defined in PHP. Search for php date format to get an overview of the available options.'),
-			                                'form_style'    => 'margin:0 0 0.6em 0.9em',
-			                                'form_width'    => 100),
-
-			'show_author' =>          array('type'          => 'checkbox',
-			                                'std_value'     => 'true',
-			                                'caption'       => __('Show comment author'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('This option defines if the comment author will be displayed.'),
-			                                'form_style'    => 'margin:0 0 0.2em 0',
-			                                'form_width'    => null),
-
-			'author_length' =>        array('type'          => 'text',
-			                                'std_value'     => '18',
-			                                'caption'       => __('Truncate author to'),
-			                                'caption_after' => __('characters'),
-			                                'tooltip'       => __('If the comment author is displayed this option limits the number of displayed characters. Set this value to 0 to view the full author.'),
-			                                'form_style'    => 'margin:0 0 0.6em 0.9em',
-			                                'form_width'    => 30),
-
-			'show_page_title' =>      array('type'          => 'checkbox',
-			                                'std_value'     => 'false',
-			                                'caption'       => __('Show title of comment page'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('This options specifies if the page title of the comment page will be displayed.'),
-			                                'form_style'    => 'margin:0 0 0.2em 0',
-			                                'form_width'    => null),
-
-			'page_title_length' =>    array('type'          => 'text',
-			                                'std_value'     => '18',
-			                                'caption'       => __('Truncate title to'),
-			                                'caption_after' => __('characters'),
-			                                'tooltip'       => __('If the comment page title is displayed this option limits the number of displayed characters. Set this value to 0 to view the full title.'),
-			                                'form_style'    => 'margin:0 0 0.6em 0.9em',
-			                                'form_width'    => 30),
-
-			'show_comment_text' =>    array('type'          => 'checkbox',
-			                                'std_value'     => 'true',
-			                                'caption'       => __('Show comment text'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('The options specifies if the comment text will be displayed in the widget.'),
-			                                'form_style'    => 'margin:0 0 0.2em 0',
-			                                'form_width'    => null),
-
-			'comment_text_length' =>  array('type'          => 'text',
-			                                'std_value'     => '25',
-			                                'caption'       => __('Truncate text to '),
-			                                'caption_after' => __('characters'),
-			                                'tooltip'       => __('If the comment text is displayed this option limits the number of displayed characters. Set this value to 0 to view the full text.'),
-			                                'form_style'    => 'margin:0 0 0.6em 0.9em',
-			                                'form_width'    => 30),
-
-			'url_to_page' =>          array('type'          => 'text',
-			                                'std_value'     => '',
-			                                'caption'       => __('URL to the linked guestbook page:'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('This options specifies the url to the guestbook page. This option is required if you want to use one of the options below.'),
-			                                'form_style'    => 'margin:1em 0 0.6em 0',
-			                                'form_width'    => null),
-
-			'gb_comments_only' =>     array('type'          => 'checkbox',
-			                                'std_value'     => 'false',
-			                                'caption'       => __('Show GB-comments only'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('Only show comments from the guestbook page specified above.'),
-			                                'form_style'    => 'margin:0 0 0.6em 0.9em',
-			                                'form_width'    => null),
-
-			'hide_gb_page_title' =>   array('type'          => 'checkbox',
-			                                'std_value'     => 'false',
-			                                'caption'       => __('Hide guestbook page title'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('With this option you can hide the page title for guestbook comments if you have enabled the option Show title of comment page. This option is only working if the URL to the guestbook page was set.'),
-			                                'form_style'    => 'margin:0 0 0.6em 0.9em',
-			                                'form_width'    => null),
-
-			'link_to_page' =>         array('type'          => 'checkbox',
-			                                'std_value'     => 'false',
-			                                'caption'       => __('Add a link to guestbook page'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('The option adds a link to the guestbook page below the comment list. This option requires the URL to the guestbook page.'),
-			                                'form_style'    => 'margin:0 0 0.2em 0.9em',
-			                                'form_width'    => null),
-
-			'link_to_page_caption' => array('type'          => 'text',
-			                                'std_value'     => __('goto guestbook page', 'text_domain'),
-			                                'caption'       => __('Caption for the link:'),
-			                                'caption_after' => null,
-			                                'tooltip'       => __('Set the caption for the link to guestbook page.'),
-			                                'form_style'    => 'margin:0 0 0.8em 1.8em',
-			                                'form_width'    => null)
+			'title' =>                array('std_value'     => __('Recent guestbook entries','comment-guestbook')),
+			'num_comments' =>         array('std_value'     => '5'),
+			'link_to_comment' =>      array('std_value'     => 'false'),
+			'show_date' =>            array('std_value'     => 'false'),
+			'date_format' =>          array('std_value'     => get_option('date_format')),
+			'show_author' =>          array('std_value'     => 'true'),
+			'author_length' =>        array('std_value'     => '18'),
+			'show_page_title' =>      array('std_value'     => 'false'),
+			'page_title_length' =>    array('std_value'     => '18'),
+			'show_comment_text' =>    array('std_value'     => 'true'),
+			'comment_text_length' =>  array('std_value'     => '25'),
+			'url_to_page' =>          array('std_value'     => ''),
+			'gb_comments_only' =>     array('std_value'     => 'false'),
+			'hide_gb_page_title' =>   array('std_value'     => 'false'),
+			'link_to_page' =>         array('std_value'     => 'false'),
+			'link_to_page_caption' => array('std_value'     => __('goto guestbook page','comment-guestbook')),
 		);
+
+		add_action('admin_init', array(&$this, 'load_widget_items_helptexts'), 2);
+	}
+
+	public function load_widget_items_helptexts() {
+		require_once(CGB_PATH.'includes/widget_helptexts.php');
+		foreach($widget_items_helptexts as $name => $values) {
+			$this->items[$name] += $values;
+		}
+		unset($widget_items_helptexts);
 	}
 
 	public function flush_widget_cache() {
@@ -201,27 +100,29 @@ class CGB_Widget extends WP_Widget {
 		if($instance['title']) {
 			$out .= $before_title . $instance['title'] . $after_title;
 		}
-		$out .= '<ul class="cgb-widget">';
+		$out .= '
+				<ul class="cgb-widget">';
 		if($comments) {
 			// Prime cache for associated posts. (Prime post term cache if we need it for permalinks.)
 			$post_ids = array_unique(wp_list_pluck($comments, 'comment_post_ID'));
 			_prime_post_caches($post_ids, strpos(get_option('permalink_structure'), '%category%'), false);
 			foreach((array) $comments as $comment) {
-				$out .= '<li class="cgb-widget-item">';
+				$out .= '
+					<li class="cgb-widget-item">';
 				if('true' === $instance['link_to_comment']) {
 					$out .= '<a href="'.$this->get_comment_link($comment).'">';
 				}
 				if('true' === $instance['show_date']) {
-					$out .= '<span class="cgb-date" title="'.__('Date of comment:').' '.esc_attr(get_comment_date()).'">'.get_comment_date($instance['date_format']).' </span>';
+					$out .= '<span class="cgb-date" title="'.__('Date of comment','comment-guestbook').': '.esc_attr(get_comment_date()).'">'.get_comment_date($instance['date_format']).' </span>';
 				}
 				if('true' === $instance['show_author']) {
-					$out .= '<span class="cgb-author" title="'.__('Comment author:').' '.esc_attr(get_comment_author()).'">'.$this->truncate($instance['author_length'], get_comment_author()).'</span>';
+					$out .= $this->truncate($instance['author_length'], get_comment_author(), 'span', array('class' => 'cgb-author', 'title' => __('Comment author','comment-guestbook').': '.esc_attr(get_comment_author())));
 				}
 				if('true' === $instance['show_page_title']) {
 					if('false' === $instance['hide_gb_page_title'] || url_to_postid($instance['url_to_page']) != $comment->comment_post_ID) {
-						$out .= '<span class="cgb-widget-title" title="'.__('Page of Comment:').' '.esc_attr(get_the_title($comment->comment_post_ID)).'">';
+						$out .= '<span class="cgb-widget-title" title="'.__('Page of comment','comment-guestbook').': '.esc_attr(get_the_title($comment->comment_post_ID)).'">';
 						if('true' === $instance['show_author']) {
-							$out .= ' '.__('in').' ';
+							$out .= ' '.__('in','comment-guestbook').' ';
 						}
 						$out .= $this->truncate($instance['page_title_length'], get_the_title($comment->comment_post_ID)).'</span>';
 					}
@@ -230,14 +131,18 @@ class CGB_Widget extends WP_Widget {
 					$out .= '</a>';
 				}
 				if('true' === $instance['show_comment_text']) {
-					$out .= '<div class="cgb-widget-text" title="'.esc_attr(get_comment_text()).'">'.$this->truncate($instance['comment_text_length'], get_comment_text()).'</div>';
+					$out .= $this->truncate($instance['comment_text_length'], get_comment_text(), 'div', array('class' => 'cgb-widget-text', 'title' => esc_attr(get_comment_text())));
 				}
 				$out .= '</li>';
 			}
 		}
-		$out .= '</ul>';
+		$out .= '
+				</ul>
+				';
 		if('true' === $instance['link_to_page']) {
-			$out .= '<div class="cgb-widget-pagelink" style="clear:both"><a title="'.esc_attr($instance['link_to_page_caption']).'" href="'.$instance[ 'url_to_page'].'">'.$instance['link_to_page_caption'].'</a></div>';
+			$out .= '
+				<div class="cgb-widget-pagelink" style="clear:both"><a title="'.esc_attr($instance['link_to_page_caption']).'" href="'.$instance[ 'url_to_page'].'">'.$instance['link_to_page_caption'].'</a></div>
+				';
 		}
 		$out .= $after_widget;
 		echo $out;
@@ -281,7 +186,9 @@ class CGB_Widget extends WP_Widget {
 	 * @param array $instance Previously saved values from database.
 	 */
 	public function form($instance) {
-		$out = '';
+		// Display general information at the top
+		$out = '<p>'.__('For all options tooltips are available which provide additional help and information. They appear if the mouse is hovered over the options text field or checkbox.','comment-guestbook').'</p>';
+		// Display the options
 		foreach($this->items as $itemname => $item) {
 			if(! isset($instance[$itemname])) {
 				$instance[$itemname] = $item['std_value'];
@@ -296,7 +203,7 @@ class CGB_Widget extends WP_Widget {
 			}
 			else { // 'text'
 				$width_text = (null === $item['form_width']) ? '' : 'style="width:'.$item['form_width'].'px" ';
-				$caption_after_text = (null === $item['caption_after']) ? '' : '<label>'.$item['caption_after'].'</label>';
+				$caption_after_text = (null === $item['caption_after']) ? '' : '<label> '.$item['caption_after'].'</label>';
 				$out .= '
 					<p'.$style_text.' title="'.$item['tooltip'].'">
 						<label for="'.$this->get_field_id($itemname).'">'.$item['caption'].' </label>
@@ -348,30 +255,64 @@ class CGB_Widget extends WP_Widget {
 		return esc_url(get_comment_link($comment->comment_ID, $link_args));
 	}
 
-	/** ************************************************************************
-	 * Function to truncate and shorten text
+	/** **************************************************************************************************
+	 * Truncate HTML, close opened tags
 	 *
-	 * @param int $max_length The length to which the text should be shortened
-	 * @param string $html The html code which should be shortened
-	 ***************************************************************************/
-	private function truncate($max_length, $html) {
-		if($max_length > 0 && strlen($html) > $max_length) {
+	 * @param int $max_length           The length (number of characters) to which the text will be
+	 *                                  shortened. With "0" the full text will be returned. With "auto"
+	 *                                  also the complete text will be used, but a wrapper div will be
+	 *                                  added which shortens the text to 1 full line via css.
+	 * @param string $html              The html code which should be shortened.
+	 * @param string $wrapper_type      Defines which kind of wrapper shall be added around the html code
+	 *                                  if a manual length shall be used. The possible values are "none",
+	 *                                  "div" and "span". With "none" no wrapper will be added, "div" and
+	 *                                  "span" are the 2 available wrapper types.
+	 *                                  If max_length is set to auto a div is mandatory and will be added
+	 *                                  always, independent of the given value.
+	 * @param array $wrapper_attributes Additional attributes for the wrapper element. The array
+	 *                                  key defines the attribute name.
+	 *****************************************************************************************************/
+	private function truncate($max_length, $html, $wrapper_type='none', $wrapper_attributes=array()) {
+		// Apply wrapper and add required css for autolength (if required)
+		$autolength = 'auto' == $max_length ? true : false;
+		if($autolength) {
+			$wrapper_type = 'div';
+		}
+		elseif('div' != $wrapper_type && 'span' != $wrapper_type) {
+			$wrapper_type = 'none';
+		}
+		if('none' != $wrapper_type) {
+			$wrapper_text = '<'.$wrapper_type;
+			foreach($wrapper_attributes as $name => $value) {
+				$wrapper_text .= ' '.$name.'="'.$value.'"';
+			}
+			if($autolength) {
+				$wrapper_text .= ' style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis"';
+			}
+			$html = $wrapper_text.'>'.$html.'</'.$wrapper_type.'>';
+		}
+
+		// Apply manual length
+		mb_internal_encoding("UTF-8");
+		if(is_numeric($max_length) && 0 < $max_length && mb_strlen($html) > $max_length) {
+			$truncated = false;
 			$printedLength = 0;
 			$position = 0;
 			$tags = array();
 			$out = '';
-			while ($printedLength < $max_length && preg_match('{</?([a-z]+)[^>]*>|&#?[a-zA-Z0-9]+;}', $html, $match, PREG_OFFSET_CAPTURE, $position)) {
+			while($printedLength < $max_length && $this->mb_preg_match('{</?([a-z]+\d?)[^>]*>|&#?[a-zA-Z0-9]+;}', $html, $match, PREG_OFFSET_CAPTURE, $position)) {
 				list($tag, $tagPosition) = $match[0];
 				// Print text leading up to the tag
-				$str = substr($html, $position, $tagPosition - $position);
-				if ($printedLength + strlen($str) > $max_length) {
-					$out .= substr($str, 0, $max_length - $printedLength);
+				$str = mb_substr($html, $position, $tagPosition - $position);
+				if($printedLength + mb_strlen($str) > $max_length) {
+					$out .= mb_substr($str, 0, $max_length - $printedLength);
 					$printedLength = $max_length;
+					$truncated = true;
 					break;
 				}
 				$out .= $str;
-				$printedLength += strlen($str);
-				if ($tag[0] == '&') {
+				$printedLength += mb_strlen($str);
+				if('&' == $tag[0]) {
 					// Handle the entity
 					$out .= $tag;
 					$printedLength++;
@@ -379,14 +320,19 @@ class CGB_Widget extends WP_Widget {
 				else {
 					// Handle the tag
 					$tagName = $match[1][0];
-					if ($tag[1] == '/')
-					{
+					if($this->mb_preg_match('{^</}', $tag)) {
 						// This is a closing tag
 						$openingTag = array_pop($tags);
-						assert($openingTag == $tagName); // check that tags are properly nested
-						$out .= $tag;
+						if($openingTag != $tagName) {
+							// Not properly nested tag found: trigger a warning and add the not matching opening tag again
+							trigger_error('Not properly nested tag found (last opening tag: '.$openingTag.', closing tag: '.$tagName.')', E_USER_WARNING);
+							$tags[] = $openingTag;
+						}
+						else {
+							$out .= $tag;
+						}
 					}
-					else if ($tag[strlen($tag) - 2] == '/') {
+					else if($this->mb_preg_match('{/\s*>$}', $tag)) {
 						// Self-closing tag
 						$out .= $tag;
 					}
@@ -397,25 +343,38 @@ class CGB_Widget extends WP_Widget {
 					}
 				}
 				// Continue after the tag
-				$position = $tagPosition + strlen($tag);
+				$position = $tagPosition + mb_strlen($tag);
 			}
 			// Print any remaining text
-			if ($printedLength < $max_length && $position < strlen($html)) {
-				$out .= substr($html, $position, $max_length - $printedLength);
+			if($printedLength < $max_length && $position < mb_strlen($html)) {
+				$out .= mb_substr($html, $position, $max_length - $printedLength);
 			}
-			// Print "..." if the html is not complete
-			if(strlen($html) != $position) {
-				$out .= ' ...';
+			// Print ellipsis ("...") if the html was truncated
+			if($truncated) {
+				$out .= ' &hellip;';
 			}
 			// Close any open tags.
-			while (!empty($tags)) {
+			while(!empty($tags)) {
 				$out .= '</'.array_pop($tags).'>';
 			}
 			return $out;
 		}
-		else {
-			return $html;
+		return $html;
+	}
+
+	private function mb_preg_match($ps_pattern, $ps_subject, &$pa_matches=null, $pn_flags=0, $pn_offset=0, $ps_encoding=null) {
+		// WARNING! - All this function does is to correct offsets, nothing else:
+		//(code is independent of PREG_PATTER_ORDER / PREG_SET_ORDER)
+		if(is_null($ps_encoding)) {
+			$ps_encoding = mb_internal_encoding();
 		}
+		$pn_offset = strlen(mb_substr($ps_subject, 0, $pn_offset, $ps_encoding));
+		$out = preg_match($ps_pattern, $ps_subject, $pa_matches, $pn_flags, $pn_offset);
+		if($out && ($pn_flags & PREG_OFFSET_CAPTURE))
+			foreach($pa_matches as &$ha_match) {
+				$ha_match[1] = mb_strlen(substr($ps_subject, 0, $ha_match[1]), $ps_encoding);
+			}
+		return $out;
 	}
 }
 ?>

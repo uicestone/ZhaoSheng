@@ -25,6 +25,47 @@ function responsive_update_social_icon_options() {
 
 add_action( 'after_setup_theme', 'responsive_update_social_icon_options' );
 
+/*
+ * Update page templete meta data
+ *
+ * E.g: Change from `page-templates/full-width-page.php` to `full-width-page.php`
+ *
+ * This function only needes to be run once but it does not mater when. after_setup_theme should be fine.
+ *
+ */
+function responsive_update_page_template_meta(){
+	$args = array(
+		'post_type' => 'page',
+		'meta_query' => array(
+			array(
+				'key' => '_wp_page_template',
+				'value' => 'default',
+				'compare' => '!='
+			)
+		)
+	);
+
+	$query = new WP_Query( $args );
+
+	if ( $query->have_posts() ) {
+
+		while ( $query->have_posts() ) {
+			$query->the_post();
+
+			$meta_value = get_post_meta( get_the_ID(), '_wp_page_template', true );
+			$page_templates_dir = 'page-templates/';
+			$conatins = strpos( $meta_value, $page_templates_dir );
+
+			if ( false !== $conatins ) {
+				$meta_value = basename( $meta_value );
+				update_post_meta( get_the_ID(), '_wp_page_template', $meta_value );
+			}
+
+		}
+	}
+}
+add_action( 'after_switch_theme', 'responsive_update_page_template_meta' );
+
 /**
  * Responsive 2.0 update check
  *
@@ -52,24 +93,3 @@ function responsive_theme_query() {
 	return false;
 
 }
-
-/**
- * Responsive 2.0 update warning message
- *
- * Displays warning message in the update notice
- */
-function responsive_admin_update_notice(){
-	global $pagenow;
-	// Add plugin notification only if the current user is admin and on theme.php
-	if ( responsive_theme_query() && current_user_can( 'update_themes' ) && ( 'themes.php' == $pagenow || 'update-core.php' == $pagenow ) ) {
-		$html = '<div class="error"><p>';
-		$html .= sprintf(
-				/* Translators: This is a big update. Please read the blog post before updating. */
-				__( '<strong>WARNING:</strong> There is a big <strong>Responsive Theme</strong> update available. Please read the %1$s before updating.', 'responsive' ),
-				'<a href="' . esc_url( 'http://cyberchimps.com/2014/03/responsive-2-0-update/' ) . '">' . __( 'blog post', 'responsive' ) . '</a>'
-			);
-		$html .= '</p></div>';
-		echo $html;
-	}
-}
-add_action( 'admin_notices', 'responsive_admin_update_notice' );

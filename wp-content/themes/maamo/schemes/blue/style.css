@@ -1,9 +1,0 @@
-
-a:link, a:visited { color: #71abd4; }
-a:hover, a:active { color: #7f7f7f; }
-
-div#header { background-color: #71abd4; }
-
-div.wp-pagenavi span, div.wp-pagenavi a { color: #999; }
-div.wp-pagenavi span.pages { color: #51545d; }
-div.wp-pagenavi span.current, div.wp-pagenavi span.extend, div.wp-pagenavi a:hover, div.wp-pagenavi a:active { color: #71abd4; }

@@ -2,7 +2,7 @@
 /*
 	Template Name: Full Width
  	Simplify Theme's Full Width Page to show the Pages Selected Full Width
-	Copyright: 2012-2013, D5 Creation, www.d5creation.com
+	Copyright: 2012-2016, D5 Creation, www.d5creation.com
 	Based on the Simplest D5 Framework for WordPress
 	Since Simplify 1.0
 */
@@ -19,7 +19,7 @@
  <?php the_post_thumbnail('thumbnail'); ?>
  <?php simplify_content(); ?>
  </div><div class="clear"> </div>
- <?php edit_post_link('Edit This Entry', '<p>', '</p>'); ?>
+ <?php edit_post_link(__('Edit This Entry','simplify'), '<p>', '</p>'); ?>
  <?php comments_template(); ?>
  <?php endwhile; endif; ?>
  
