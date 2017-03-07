@@ -11,6 +11,18 @@ h1{
 	font-weight:600;
 }
 
+a{
+	color:#844;
+}
+
+a:hover{
+	color:#06c;
+}
+
+body {
+	font-family: Helvetica, Arial, 'Microsoft Yahei UI', 'Microsoft Yahei', 'PingFang SC', sans-serif;
+}
+
 #container {
 	max-width: 1280px;
 }
@@ -72,10 +84,6 @@ h1{
     height: 250px;
 }
 
-a{
-	color:#844;
-}
-
-a:hover{
-	color:#06c;
+.widget-wrapper {
+	height: 14em;
 }
