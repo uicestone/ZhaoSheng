@@ -79,7 +79,7 @@ body {
 }
 
 #featured {
-	background: url(http://zs.shdfz.net/wp-content/uploads/2017/03/2017自主招生.jpg) center;
+	background: url(/wp-content/uploads/2017/03/2017自主招生.jpg) center;
     background-size: cover;
     height: 250px;
 }
