@@ -1,4 +1,3 @@
-
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
@@ -10,3 +9,8 @@ RewriteRule . /index.php [L]
 </IfModule>
 
 # END WordPress
+
+<IfModule mod_rewrite.c>
+RewriteCond "%{HTTPS}" "!=on"
+RewriteRule "^(.*)$" "https://zs.shdfz.net/$1" [L,R=301]
+</IfModule>
