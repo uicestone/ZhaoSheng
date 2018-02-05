@@ -12,18 +12,27 @@ h1{
 }
 
 a{
-	color:#844;
+	color: #b23321;
 }
 
 a:hover{
-	color:#06c;
+	color: #ffadad;
+}
+
+p {
+	margin: 0;
+	margin-bottom: 0.5em;
 }
 
 body {
 	font-family: Helvetica, Arial, 'Microsoft Yahei UI', 'Microsoft Yahei', 'PingFang SC', sans-serif;
+	font-size: 15px;
 }
 
-#container {
+#container,
+body.full-width-layout #content-outer,
+body.default-layout #content-outer,
+body.full-width-no-box #content-outer {
 	max-width: 1280px;
 }
 
@@ -40,6 +49,7 @@ body {
 	float: right;
     margin-top: 27px;
     width: 954px;
+    background: none;
 }
 
 .menu {
@@ -48,11 +58,19 @@ body {
 	border-radius: 3px;
 }
 
+.menu li {
+	padding: 0;
+}
+
 .menu a {
 	padding: 0 18px;
 	color: #676767;
 	text-shadow: 1px 1px 3px #cecece;
 	border-left: 1px solid #e6e6e6;
+}
+
+ul.menu > li:hover {
+	background: none;
 }
 
 .front-page #wrapper {
@@ -79,15 +97,21 @@ body {
 }
 
 #featured {
-	background: url(/wp-content/uploads/2017/03/2017自主招生.jpg) center;
-    background-size: cover;
-    height: 250px;
+	background: url('/wp-content/uploads/2018/02/上大附中自招2018.jpg') center;
+	background-size: cover;
+	height: 222px;
 }
 
-.widget-wrapper {
-	height: 14em;
+.home-widgets .widget-wrapper {
+	height: 16em;
+	line-height: 1.9;
 }
 
 .menu .current_page_item a, .menu .current-menu-item a {
 	color: #d6d6d6;
+}
+
+#content-archive .post {
+	border-bottom: 2px #ccc solid;
+	padding: 1em;
 }
